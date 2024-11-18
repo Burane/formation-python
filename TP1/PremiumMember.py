@@ -11,5 +11,5 @@ class PremiumMember(Member):
     
         
     def borrow_book(self, book: Book) -> None:
-        if len(self.borrowed_books) <= self.borrow_limit:
+        if len(self.borrowed_books) < self.borrow_limit:
             super().borrow_book(book)
