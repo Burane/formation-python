@@ -1,0 +1,23 @@
+Added book: The Great Gatsby by F. Scott Fitzgerald - Available
+Added book: 1984 by George Orwell - Available
+Added book: To Kill a Mockingbird by Harper Lee - Available
+========================================
+Added regular member: Alice
+Added premium member: Bob
+========================================
+Library books:
+- The Great Gatsby by F. Scott Fitzgerald - Available
+- 1984 by George Orwell - Available
+- To Kill a Mockingbird by Harper Lee - Available
+========================================
+Alice has borrowed The Great Gatsby.
+========================================
+Bob has borrowed To Kill a Mockingbird.
+========================================
+Alice has borrowed the following books:
+- The Great Gatsby
+Bob has borrowed the following books:
+- To Kill a Mockingbird
+========================================
+Alice has returned The Great Gatsby.
+Alice has not borrowed any books.

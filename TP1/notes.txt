@@ -1,0 +1,97 @@
+Sujet :
+
+<=============================================================================>
+
+Dans ce projet, vous allez implémenter un système de gestion de bibliothèque en Python.
+Le but est de permettre l’ajout de livres, la gestion de membres (avec des types de membres ayant des limites d'emprunts différentes),
+ainsi que les opérations de prêt et de retour de livres. Le fichier main.py est déjà fourni, et vous devrez implémenter les fichiers et
+les classes nécessaires pour que ce fichier fonctionne correctement.
+
+Structure du projet
+
+Le projet doit contenir les fichiers suivants :
+
+    Book.py : contient la classe Book.
+    Library.py : contient la classe Library.
+    Member.py : contient la classe Member.
+    RegularMember.py : contient la classe RegularMember (héritant de Member).
+    PremiumMember.py : contient la classe PremiumMember (héritant de Member).
+
+Vous devez placer chaque classe dans le fichier correspondant et suivre les instructions 
+    ci-dessous pour implémenter chacune d'elles.
+
+Fichier Book.py : classe Book
+    Attributs :
+        title : titre du livre (chaîne de caractères).
+        author : auteur du livre (chaîne de caractères).
+        is_available : booléen indiquant si le livre est disponible (initialisé à True).
+
+    Méthodes :
+        __init__(self, title, author) : initialise un livre avec un titre et un auteur.
+        __str__(self) : retourne une chaîne de caractères représentant le livre 
+            (titre, auteur et disponibilité).
+        borrow(self) : permet de changer is_available à False si le livre est disponible, 
+            et retourne True si l'emprunt est réussi, sinon False.
+        return_book(self) : rend le livre disponible (is_available devient True).
+
+
+Fichier Library.py : classe Library
+    Attributs :
+        books : liste de livres disponibles dans la bibliothèque.
+        members : liste des membres inscrits dans la bibliothèque.
+
+    Méthodes :
+        __init__(self) : initialise la bibliothèque avec des listes vides de livres et de membres.
+        add_book(self, title, author) : ajoute un livre à la bibliothèque.
+        add_member(self, member_type, name) : ajoute un membre de type RegularMember ou PremiumMember,
+            selon le type fourni.
+        list_books(self) : affiche la liste des livres dans la bibliothèque.
+        find_book(self, title) : retourne le livre correspondant au titre, ou None 
+            si le livre n’est pas trouvé.
+        find_member(self, name) : retourne le membre correspondant au nom, ou None 
+            si le membre n’est pas trouvé.
+
+
+Fichier Member.py : classe Member
+    Attributs :
+        name : nom du membre.
+        borrowed_books : liste des livres empruntés par le membre.
+
+    Méthodes :
+        __init__(self, name) : initialise un membre avec un nom et une liste vide de livres empruntés.
+        borrow_book(self, book) : permet au membre d'emprunter un livre s'il est disponible. 
+            Si l’emprunt est réussi, le livre est ajouté à borrowed_books.
+        return_book(self, book) : permet au membre de retourner un livre qu'il a emprunté.
+        list_borrowed_books(self) : affiche les livres empruntés par le membre.
+
+
+Fichier RegularMember.py : classe RegularMember
+    Hérite de la classe Member.
+
+    Attributs supplémentaires :
+        borrow_limit : limite d'emprunts fixée à 2 pour les membres réguliers.
+
+    Méthodes :
+        borrow_book(self, book) : vérifie que le membre n'a pas atteint la limite d'emprunts 
+            avant de permettre l'emprunt d’un nouveau livre.
+
+
+Fichier PremiumMember.py : classe PremiumMember
+    Hérite de la classe Member.
+
+    Attributs supplémentaires :
+        borrow_limit : limite d'emprunts fixée à 5 pour les membres premium.
+
+    Méthodes :
+        borrow_book(self, book) : vérifie que le membre n'a pas atteint la limite d'emprunts avant de permettre l'emprunt d’un nouveau livre.
+
+<=============================================================================>
+
+Encapsulation : Les attributs comme title, author, et is_available dans la classe Book sont protégés 
+    et modifiables via des méthodes.
+
+Héritage : Les classes RegularMember et PremiumMember héritent de Member et redéfinissent 
+    la méthode borrow_book pour ajouter une limite spécifique.
+    
+Polymorphisme : Les méthodes borrow_book et return_book sont polymorphiques, 
+    et chaque membre peut utiliser la même méthode pour effectuer une action personnalisée.
