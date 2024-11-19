@@ -1,0 +1,138 @@
+Dans ce TP, vous allez créer un pipeline de traitement des données Pokémon.
+Le but est de récupérer les informations d'un Pokémon depuis une API, de les
+nettoyer et les transformer, puis de les stocker dans une base de données.
+Vous utiliserez l’API PokéAPI pour obtenir les informations et SQLite comme base de données.
+
+Vous disposez de trois fichiers principaux : app.py, pipeline.py et pokemon_service.py, qui sont fournis. Ces fichiers contiennent les structures de base pour démarrer le projet.
+
+Votre objectif est de compléter le pipeline en implémentant trois modules :
+
+    data_cleaning.py : pour nettoyer les données brutes récupérées.
+    data_formatting.py : pour transformer et ajouter des informations supplémentaires aux données nettoyées.
+    database.py : pour stocker les données traitées dans une base de données SQLite.
+
+<=========================================================================================================================>
+
+Fichiers fournis
+
+----------
+
+app.py :
+Ce fichier initialise une application web avec Flask. Voici son fonctionnement :
+
+    Il définit une route /process_pokemon qui accepte des requêtes POST avec le nom d'un 
+        Pokémon.
+    Il utilise le pipeline de traitement pour récupérer et stocker les informations du
+         Pokémon.
+    En cas de succès, il retourne un message indiquant que le traitement du Pokémon est 
+        terminé.
+
+----------
+
+pipeline.py :
+Ce fichier définit la classe Pipeline, qui coordonne les étapes de traitement des 
+    données Pokémon. Il est structuré pour réaliser quatre étapes :
+
+    Récupération des données du Pokémon via PokemonService.
+    Nettoyage des données récupérées.
+    Transformation des données nettoyées.
+    Sauvegarde des données dans une base de données.
+
+----------
+
+pokemon_service.py :
+Ce fichier contient la classe PokemonService, qui se connecte à l’API PokéAPI pour 
+    récupérer les données d’un Pokémon.
+
+
+<=========================================================================================================================>
+
+Fichiers à compléter
+
+Vous devez implémenter les trois modules suivants pour que le pipeline
+     fonctionne correctement :
+
+----------
+
+1. data_cleaning.py : Classe DataCleaning
+
+Description : Cette classe nettoie les données brutes récupérées par PokemonService 
+    et filtre les informations clés nécessaires pour le pipeline.
+
+Détails d'implémentation :
+
+    Créez une méthode statique clean_data(data).
+    Filtrez les informations importantes du Pokémon et stockez les dans un
+         dictionnaire sous les clés suivantes 
+        : id, name, height, weight, base_experience et types.
+    Combinez les types dans une seule chaîne de caractères, séparée par des virgules.
+
+Exemple : Si le Pokémon est de types "fire" et "flying", 
+    les types devraient être stockés sous forme de chaîne : "fire, flying".
+
+----------
+
+2. data_formatting.py : Classe DataFormatting
+
+Description : Cette classe transforme les données nettoyées en ajoutant des
+     informations supplémentaires.
+
+Détails d'implémentation :
+
+    Créez une méthode statique format_data(cleaned_data).
+    Ajoutez un champ bmi (Body Mass Index) calculé à partir des attributs weight et height.
+    Utilisez la formule suivante pour calculer le BMI : bmi = weight / (height ** 2).
+
+Attention : Assurez-vous que weight et height soient disponibles dans cleaned_data
+     avant de calculer le BMI.
+
+----------
+
+3. database.py : Classe Database
+
+Description : Cette classe gère la connexion et les opérations sur la base de données
+    SQLite pour stocker les informations sur les Pokémon.
+
+Détails d'implémentation :
+
+    Dans le constructeur __init__, configurez la base de données SQLite avec
+             une table pokemon ayant les colonnes suivantes :
+
+        id (entier, clé primaire)
+        name (chaîne, unique)
+        height (entier)
+        weight (entier)
+        base_experience (entier)
+        types (chaîne)
+        bmi (float)
+
+    Créez une méthode save_pokemon(formatted_data) pour insérer les données 
+        traitées dans la table.
+
+        Si le Pokémon est déjà stocké dans la base de données 
+        (erreur d’unicité sur name), gérez l'exception IntegrityError et retournez -1.
+        Si l'insertion est réussie, retournez 0.
+
+<=========================================================================================================================>
+
+Dépendances :
+flask
+requests
+sqlalchemy
+pandas
+
+1 - Lancer app.py pour lancer le serveur flask
+2 - Lancer quelques curl :
+
+LINUX (Terminal) :
+
+curl -X POST http://127.0.0.1:5000/process_pokemon -H "Content-Type: application/json" -d '{"name": "pikachu"}'
+curl -X POST http://127.0.0.1:5000/process_pokemon -H "Content-Type: application/json" -d '{"name": "bulbasaur"}'
+curl -X POST http://127.0.0.1:5000/process_pokemon -H "Content-Type: application/json" -d '{"name": "squirtle"}'
+curl -X POST http://127.0.0.1:5000/process_pokemon -H "Content-Type: application/json" -d '{"name": "charmander"}'
+
+WINDOWS (Powershell) :
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_pokemon" -Method Post -Headers @{ "Content-Type" = "application/json" } -Body '{"name": "pikachu"}'
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_pokemon" -Method Post -Headers @{ "Content-Type" = "application/json" } -Body '{"name": "bulbasaur"}'
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_pokemon" -Method Post -Headers @{ "Content-Type" = "application/json" } -Body '{"name": "squirtle"}'
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_pokemon" -Method Post -Headers @{ "Content-Type" = "application/json" } -Body '{"name": "charmander"}'

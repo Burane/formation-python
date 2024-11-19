@@ -1,0 +1,40 @@
+Dans cet atelier, vous allez transformer le pipeline de traitement de données du TP 
+    précédent en un programme fonctionnel.
+
+L'objectif est de comprendre comment concevoir un flux de traitement en programmation 
+    fonctionnelle en limitant les effets de bord,
+    tout en consolidant vos connaissances sur le traitement et la sauvegarde de données 
+    issues d'une API externe.
+
+Le programme suit le paradigme fonctionnel, ce qui signifie qu'il évite les changements 
+    d'état et les effets de bord autant que possible.
+
+Cela facilite la lecture et la maintenance du code tout en permettant de mieux 
+    structurer chaque étape du pipeline.
+
+Les dépendances sont les mêmes que pour le TP2:
+flask
+requests
+sqlalchemy
+pandas
+
+Vous implémenterez le pipeline en un seul et unique fichier tp.py, que vous 
+    lancerez directement pour tester votre programme.
+
+Connexion à la Base de Données : Une connexion SQLite sera gérée par un context manager 
+    pour garantir une ouverture et une fermeture propre de la connexion.
+
+Fonctions de traitement :
+
+    fetch_pokemon: Récupère les données d'un Pokémon depuis l'API PokéAPI à l'aide du 
+        module requests.
+
+    clean_pokemon_data: Nettoie les données brutes pour ne conserver que 
+        les champs nécessaires.
+    calculate_bmi: Calcule l’IMC (BMI en anglais) à partir des informations de poids 
+        et de taille du Pokémon.
+    save_to_database: Insère les données traitées dans la base de données en 
+        s’assurant d’éviter les doublons.
+
+Fonction principale main : Elle orchestre l'ensemble des étapes du pipeline, 
+    en utilisant une approche par générateur pour traiter chaque Pokémon un par un.
