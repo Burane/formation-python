@@ -1,0 +1,3 @@
+Dans cet atelier, nous allons créer un environnement virtuel et le figer dans un fichier requirements.txt afin de permettre à n'importe quelle machine d'exécuter le script plot.py
+Ce script utilise différentes dépendances, que vous installerez dans un environnement virtuel afin de l'exécuter pour vérifier son bon fonctionnement.
+Vous utiliserez ensuite la sous-commande de pip vue dans le chapitre 5 pour figer les dépendances de cet environnement virtuel dans requirements.txt.

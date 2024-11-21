@@ -1,0 +1,68 @@
+Dans cet atelier, nous allons créer une petite application appelée WeatherApp.
+Elle récupérera les informations météorologiques d'une ville via une API de météo.
+Puis, vous la packagerez et la publierez sur PyPI pour qu'elle soit installable par d'autres utilisateurs.
+
+Prérequis :
+- Création d'un compte sur pypi.org ; vous aurez besoin de votre identifiant et de votre mot de passe pour publier votre application.
+    ! Pensez à sauvegarder vos identifiants ainsi que vos recovery codes. !
+- Installation des dépendances ; vous aurez besoin des modules wheel et setuptools pour packager votre application.
+- Vous aurez également besoin de twine pour publier votre application sur PyPI.
+- Création d'un répo github dédié à l'application, appelé WeatherApp.
+
+Ce répo github contiendra votre application :
+
+WeatherApp/
+│
+├── weatherapp/           # Dossier du package
+│   ├── __init__.py       # Fichier d'initialisation du package
+│   └── weather.py        # Module principal de l'application
+│
+├── setup.py              # Script de configuration pour setuptools
+└── README.md             # Description du package
+
+Votre application enverra une requête à l'API documentée à l'adresse suivante 
+    : https://open-meteo.com/
+Afin de récupérer les données météo suivantes sur une ville à partir de ses 
+    coordonnées (latitude et longitude):
+
+- La température à 2m de hauteur
+- La vitesse actuelle du vent à 10m de hauteur
+- L'humidité relative à 2m de hauteur
+
+Votre fichier README devra décrire le fonctionnement de votre application de façon claire, ainsi que la marche à suivre pour l'installer via pip.
+
+Vous devrez implémenter la classe Weather, qui contiendra les attributs de votre choix, 
+ainsi que deux méthodes publiques :
+
+- display_current_weather(city_coordinates, refresh_delay), 
+qui effectuera les tâches suivantes en boucle:
+
+    - Vérifier que refresh_delay est supérieur ou égal à 1.
+    - Envoyer une requête à l'API open-meteo pour récupérer les données météo actuelles de city
+    - Vider le terminal et afficher les données météo formatées proprement (de manière facilement compréhensible)
+    - Attendre refresh_delay secondes avant de recommencer.
+
+- display_past_weather(city_coordinates, time_start, time_end), 
+qui effectuera les tâches suivantes :
+    - Vérifier  que time_start et time_end se trouvent tous les deux dans le passé
+    - Vérifier que time_end est antérieur à time_start
+    - Envoyer une requête à l'API open-meteo pour récupérer les données météo de 
+        city entre time_start et time_end, heure par heure
+    - Formater les données recues et les afficher proprement.
+
+Après avoir testé votre application en trouvant des coordonnées de villes sur https://www.coordonnees-gps.fr/, vous la packagerez et la publierez sur PyPI
+avec votre compte sous la nomenclature suivante : {github_username}-weatherapp-11-2024.
+
+Note :
+twine ne vous laissera pas upload votre package sans vous avoir authentifié avec votre username et votre mot de passe, en plus d'une clé API.
+Pour pouvoir créer une clé API, vous devrez d'abord activer votre compte à partir du mail envoyé par PyPI sur votre adresse mail.
+Vous devrez ensuite activer la double authentification à l'aide d'une application de 2FA sur votre téléphone pour pouvoir créer une clé API.
+
+Après avoir upload votre package en vous authentifiant avec vos identifiants ainsi que la clé API, désinstallez le de votre système et réinstallez le via pip (par son nom uniquement et non par le fichier wheel).
+Vous pourrez ensuite le tester en local en l'important normalement.
+
+
+Questions :
+- Pourquoi est-il important d'avoir un fichier __init__.py dans le dossier weatherapp ?
+- Comment la commande pip install recherche-t-elle votre package ?
+- Quels sont les avantages de partager des packages sur PyPI ?

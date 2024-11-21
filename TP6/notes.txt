@@ -1,0 +1,37 @@
+Dans ce TP, vous optimiserez un pipeline de traitement d'images implémenté sur la base du paradigme fonctionnel.
+Vous utiliserez les outils timeit et cProfile vus pendant le chapitre 6.
+Vous êtes également libres d'utiliser tous les outils de profiling de votre choix.
+
+Documentation officielle de cProfile : https://docs.python.org/3/library/profile.html
+Documentation officielle de timeit : https://docs.python.org/fr/3/library/timeit.html
+
+<===============================================================================================>
+
+Présentation du pipeline :
+    Le programme implémente un pipeline pour traiter des données d'images à travers trois étapes : chargement, traitement et sauvegarde.
+    Les données sont transmises entre les étapes en utilisant queue.Queue.
+
+Les étapes du pipeline sont les suivantes :
+    - Chargement : Lit une liste de chemins d'accès à des fichiers image et charge les images en mémoire.
+    - Traitement : Applique des opérations de traitement d'image de base (redimensionnement, conversion en niveaux de gris et filtrage de couleur).
+    - Sauvegarde : Sauvegarde les images traitées dans un répertoire de sortie.
+    - Chaque étape prend les données d'une file d'attente, les traite, puis les place dans la file d'attente de l'étape suivante.
+
+<===============================================================================================>
+
+Objectifs :
+
+Analyser les performances du programme :
+    - Mesurer le temps moyen d'exécution du programme d'origine avec average_exec_time.py.
+    - Profilage de l'ensemble du pipeline à l'aide de cProfile.
+    - Comparaison individuelle de différentes solutions pour chaque étape et sous-étape avec timeit / cProfile.
+
+Optimiser le programme :
+    - Identifier et optimiser les goulets d'étranglement dans le code.
+    - Tenter de résoudre ces bottlenecks pour améliorer le débit et la scalabilité du programme.
+
+Vous écrirez une première version optimisée du script fourni dans un fichier séparé, et mesurerez son temps d'exécution moyen.
+
+Multithreader le pipeline :
+Une fois votre programme optimisé en monothread (fil d'exécution unique), vous implémenterez dans un fichier séparé une version
+multithreadée du pipeline, comportant un thread par étape de traitement. Vous mesurerez également le temps d'exécution moyen de ce nouveau script.
